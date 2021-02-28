@@ -1,0 +1,39 @@
+[SETUP]
+APP_DELAY_TIME=5000
+
+[COPYFILES_32]
+SoftwareDriver\DLL\CMICNFG3.cpl>>>%WINDIR%\system\CMICNFG3.cpl
+SoftwareDriver\DLL\VmixP6.dll>>>%WINDIR%\system\VmixP6.dll -NODELETE
+oemicon\>>>%WINDIR%\
+
+[COPYFILES_64]
+WinUpdate\KB936225x64.msu>>>%WINDIR%\syswow64\KB936225x64.msu
+SoftwareDriver\DLL\CMICNFG3.cpl>>>%WINDIR%\syswow64\CMICNFG3.dll
+SoftwareDriver\DLL\CMICNFG364.cpl>>>%WINDIR%\system32\CMICNFG3.cpl
+SoftwareDriver\DLL\CMPaOxy.dll>>>%WINDIR%\syswow64\CMPaOxy.dll
+SoftwareDriver\DLL\VmixP6.dll>>>%WINDIR%\syswow64\VmixP6.dll -NODELETE
+oemicon\>>>%WINDIR%\
+
+[POSTRUNAPP_INSTALL_32]
+%SETUPDIR%\Program\CmEnhance.exe "%HARDWAREID%" -WAIT
+%WINDIR%\system32\rundll32.exe %WINDIR%\system\CMICNFG3.cpl,CMICtrlWnd
+
+[POSTRUNAPP_INSTALL_64]
+%WINDIR%\system32\wusa.exe %WINDIR%\syswow64\KB936225x64.msu /quiet /norestart -WAIT
+%SETUPDIR%\Program\CmEnhance.exe "%HARDWAREID%"  -WAIT
+%WINDIR%\syswow64\rundll32.exe %WINDIR%\syswow64\CMICNFG3.dll,CMICtrlWnd
+
+[ADDREG_32]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Control Panel\Cpls",Cmcpls3,,"%WINDIR%\System\CMICNFG3.cpl"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Run",CmPCIaudio,,"RunDll32 CMICNFG3.cpl,CMICtrlWnd"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media PCI Audio Driver",DisplayName,,"%OEMTITLE%"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media PCI Audio Driver",DisplayIcon,,"%WINDIR%\cmeaupci.ico"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media PCI Audio Driver",UninstallString,,"%WINDIR%\System32\cmeaupci.exe /rm /ppci8768"
+
+
+
+[ADDREG_64]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Run",CmPCIaudio,,"%WINDIR%\syswow64\RunDll32.exe %WINDIR%\Syswow64\CMICNFG3.dll,CMICtrlWnd"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media PCI Audio Driver",DisplayName,,"%OEMTITLE%"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media PCI Audio Driver",DisplayIcon,,"%WINDIR%\cmeaupci.ico"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media PCI Audio Driver",UninstallString,,"%WINDIR%\System32\cmeaupci.exe /rm /ppci8768"

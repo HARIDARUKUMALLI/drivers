@@ -1,0 +1,26 @@
+[COPYFILES_32]
+Advance\DLL\CMICNFG3.cpl>>>%WINDIR%\system\CMICNFG3.cpl
+Advance\DLL\CMRMDRV3.exe>>>%WINDIR%\system32\CMRMDRV3.exe
+
+[COPYFILES_64]
+Advance\DLL\CMICNFG3.cpl>>>%WINDIR%\syswow64\CMICNFG3.dll
+Advance\DLL\CMICNFG364.cpl>>>%WINDIR%\system32\CMICNFG3.cpl
+Advance\DLL\CMRMDRV3_64.exe>>>%WINDIR%\system32\CMRMDRV3.exe
+Advance\DLL\CMPaOxy.dll>>>%WINDIR%\syswow64\CMPaOxy.dll
+
+[POSTRUNAPP_INSTALL_32]
+%WINDIR%\system32\rundll32.exe %WINDIR%\system\CMICNFG3.cpl,CMICtrlWnd
+
+[POSTRUNAPP_INSTALL_64]
+%WINDIR%\syswow64\rundll32.exe %WINDIR%\syswow64\CMICNFG3.dll,CMICtrlWnd
+
+[ADDREG_32]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Control Panel\Cpls",Cmcpls3,,"%WINDIR%\System\CMICNFG3.cpl"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Run",CmPCIaudio,,"RunDll32 CMICNFG3.cpl,CMICtrlWnd"
+;HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media PCI Audio Driver",DisplayName,,"C-Media PCI Sound"
+;HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media PCI Audio Driver",UninstallString,,"%WINDIR%\system32\CMRMDRV3.exe"
+
+[ADDREG_64]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Run",CmPCIaudio,,"%WINDIR%\syswow64\RunDll32.exe %WINDIR%\Syswow64\CmiCnfg3.dll,CMICtrlWnd"
+;HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media PCI Audio Driver",DisplayName,,"C-Media PCI Sound"
+;HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media PCI Audio Driver",UninstallString,,"%WINDIR%\syswow64\CMRMDRV3.exe"
